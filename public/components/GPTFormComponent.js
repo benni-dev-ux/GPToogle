@@ -54,13 +54,23 @@ class gptSearchBar extends HTMLElement {
 
 
     connectedCallback() {
-        this.shadowRoot
-            .querySelector("#promptResponseBtn")
-            .addEventListener("click", () => this.promptResponse());
+        let prompBtn = this.shadowRoot.querySelector('#promptResponseBtn');
+        prompBtn.addEventListener("click", () => this.promptResponse());
+
+        let inputElement = this.shadowRoot.querySelector('#inputField');
+        inputElement.focus();
+        inputElement.select();
+        inputElement.addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                prompBtn.click();
+            }
+        });
     }
 
     disconnectedCallback() {
         this.shadowRoot.querySelector("#generateRes").removeEventListener();
+        this.shadowRoot.querySelector("#inputField").removeEventListener();
     }
 }
 
