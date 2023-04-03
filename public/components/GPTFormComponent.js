@@ -11,10 +11,17 @@ template.innerHTML = `
             <input  placeholder="Type a message..."id="inputField"></input>
                 <button id="promptResponseBtn"><i class="fa-sharp fa-solid fa-search btn-icon"></i></button>
         </div>
+  
         <div id="output">
-        
         </div>
+        
+        <div id="loading-animation">
+        <span class="circle one"></span>
+        <span class="circle two"></span>
+        <span class="circle three"></span>
+     </div>
     </div>
+
 `;
 
 class gptSearchBar extends HTMLElement {
@@ -24,13 +31,16 @@ class gptSearchBar extends HTMLElement {
         this.attachShadow({ mode: "open" });
         this.shadowRoot.appendChild(template.content.cloneNode(true));
 
+
     }
 
 
     async promptResponse() {
-        let inputElement = this.shadowRoot.querySelector('#inputField');
-        let msgConent = inputElement.value
-        inputElement.value = ''
+        let msgConent = this.inputElement.value
+        this.inputElement.value = ''
+
+        this.outputElement.style.opacity = "0";
+        this.loadingElement.style.visibility = "visible";
 
 
         if (msgConent) {
@@ -41,9 +51,10 @@ class gptSearchBar extends HTMLElement {
                 headers: { 'Content-Type': 'application/json' }
             })
 
-            let outputElement = this.shadowRoot.querySelector("#output");
-            outputElement.innerHTML = await response.text();
-            outputElement.style.opacity = "1";
+
+            this.loadingElement.style.visibility = "hidden";
+            this.outputElement.innerHTML = await response.text();
+            this.outputElement.style.opacity = "1";
 
 
 
@@ -54,13 +65,16 @@ class gptSearchBar extends HTMLElement {
 
 
     connectedCallback() {
+        this.loadingElement = this.shadowRoot.querySelector('#loading-animation');
+        this.inputElement = this.shadowRoot.querySelector('#inputField');
+        this.outputElement = this.shadowRoot.querySelector("#output");
         let prompBtn = this.shadowRoot.querySelector('#promptResponseBtn');
         prompBtn.addEventListener("click", () => this.promptResponse());
 
-        let inputElement = this.shadowRoot.querySelector('#inputField');
-        inputElement.focus();
-        inputElement.select();
-        inputElement.addEventListener("keypress", function(event) {
+
+        this.inputElement.focus();
+        this.inputElement.select();
+        this.inputElement.addEventListener("keypress", function(event) {
             if (event.key === "Enter") {
                 event.preventDefault();
                 prompBtn.click();
