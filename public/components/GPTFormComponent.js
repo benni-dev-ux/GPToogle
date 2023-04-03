@@ -8,14 +8,12 @@ template.innerHTML = `
 
     <div class="search-wrapper">
         <div class="input-row">
-            <input  placeholder="Type message..."id="inputField"></input>
+            <input  placeholder="Type a message..."id="inputField"></input>
                 <button id="promptResponseBtn"><i class="fa-sharp fa-solid fa-search btn-icon"></i></button>
         </div>
-        <p id="output">
+        <div id="output">
         
-        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-
-        </p>
+        </div>
     </div>
 `;
 
@@ -30,17 +28,25 @@ class gptSearchBar extends HTMLElement {
 
 
     async promptResponse() {
-        let input = this.shadowRoot.querySelector('#inputField').value;
+        let inputElement = this.shadowRoot.querySelector('#inputField');
+        let msgConent = inputElement.value
+        inputElement.value = ''
 
-        if (input) {
-            let uri = '/prompt/user/' + input
+
+        if (msgConent) {
+            let uri = '/prompt/user/' + msgConent;
             const response = await fetch(uri, {
                 method: 'GET',
                 mode: 'cors',
                 headers: { 'Content-Type': 'application/json' }
             })
 
-            this.shadowRoot.querySelector("#output").innerHTML = await response.text();
+            let outputElement = this.shadowRoot.querySelector("#output");
+            outputElement.innerHTML = await response.text();
+            outputElement.style.opacity = "1";
+
+
+
         }
 
     }
