@@ -22,7 +22,9 @@ async function promptGptResponse(request, response) {
 
     const res = await openAi.createChatCompletion({
         model: "gpt-3.5-turbo",
-        messages: [{ role: request.params.role, content: request.params.content }],
+        messages: [{ role: "system", content: "Hi, I'm an AI Assistant. Can I help you with anything?" },
+            { role: request.params.role, content: request.params.content }
+        ],
         max_tokens: 4000,
     })
 
