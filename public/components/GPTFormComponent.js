@@ -51,12 +51,9 @@ class gptSearchBar extends HTMLElement {
                 headers: { 'Content-Type': 'application/json' }
             })
 
-
             this.loadingElement.style.visibility = "hidden";
-            this.outputElement.innerHTML = await response.text();
+            this.outputElement.innerText = await response.text();
             this.outputElement.style.opacity = "1";
-
-
 
         }
 
