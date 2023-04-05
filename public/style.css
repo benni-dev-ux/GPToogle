@@ -1,7 +1,7 @@
 :root {
-  --background-grey: #82889f;
-  --background-light-grey: #eceff1;
-  --background-dark-grey: #22303c;
+  --background-light-gray: #fbfbfb;
+  --background-gray: #eeeeee;
+  --font-dark-grey: #002b5b;
   --accent1: #75ac9d;
   --search-width: clamp(20rem, 45vw, 65rem);
 }
@@ -10,11 +10,11 @@ body {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
-  height: 100vh;
+  height: 90vh;
   justify-content: start;
   align-items: center;
   font-family: Arial, Helvetica, sans-serif;
-  background-color: var(--background-grey);
+  background-color: var(--background-gray);
 }
 
 .search-wrapper {
@@ -30,11 +30,11 @@ body {
   line-height: 2rem;
   text-align: center;
   margin: auto;
-  color: var(--background-grey);
+  color: var(--font-dark-grey);
 }
 
 .btn-icon:hover {
-  color: var(--background-dark-grey);
+  color: var(--font-dark-grey);
   font-size: 1.1rem;
   transition: ease;
 }
@@ -46,7 +46,7 @@ body {
   flex-wrap: nowrap;
   padding: 1rem;
   margin-bottom: 1rem;
-  background-color: var(--background-light-grey);
+  background-color: var(--background-light-gray);
   border-radius: 4px;
   width: var(--search-width);
 }
@@ -57,7 +57,7 @@ body {
   height: 2.5rem;
   font-size: 1rem;
   flex-grow: 5;
-  color: var(--background-dark-grey);
+  color: var(--font-dark-grey);
   margin-left: 1rem;
   margin-right: 1rem;
 }
@@ -73,18 +73,18 @@ body {
   font-size: 1rem;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  color: var(--background-dark-grey);
+  color: var(--font-dark-grey);
   width: var(--search-width);
   padding: 1rem;
   max-height: 30rem;
   overflow: scroll;
-  border: 1px solid var(--background-light-grey);
-  color: var(--background-light-grey);
+  background-color: var(--background-light-gray);
   border-radius: 4px;
   transition: opacity 500ms;
   opacity: 0;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  text-align: justify;
 }
 
 #output::-webkit-scrollbar {
@@ -110,7 +110,7 @@ body {
   width: 1rem;
   height: 1rem;
   border-radius: 50%;
-  background-color: var(--background-light-grey);
+  background-color: var(--font-dark-grey);
   transform: rotate(45deg);
   animation: pulse 2s infinite;
 }
