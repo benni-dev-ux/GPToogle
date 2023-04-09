@@ -12,7 +12,10 @@ template.innerHTML = `
                 <button id="promptResponseBtn"><i class="fa-sharp fa-solid fa-search btn-icon"></i></button>
         </div>
   
-        <div id="output"></div>
+        <div id="output-wrapper">
+            <div id="output">
+            </div>
+        </div>
         
         <div id="loading-animation">
         <span class="circle one"></span>
